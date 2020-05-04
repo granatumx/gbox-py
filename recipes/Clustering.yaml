@@ -1,0 +1,29 @@
+id: "086529d7-d584-4741-8150-5bea9b0d0e56"
+meta:
+  title: "Clustering"
+  subtitle: "A quick pipeline that helps you find out the sub-populations in your cells"
+  maintainer:
+    name: "Xun Zhu"
+    email: "zhuxun@gmail.com"
+steps:
+  -
+    gbox: "UploadFiles-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyDownsampling-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyGeneFiltering-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyNormalization-{VER}"
+    initialState: null
+  -
+    gbox: "LogTransformation-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyTsne-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyClustering-{VER}"
+    initialState: null

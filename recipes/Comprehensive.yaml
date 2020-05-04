@@ -1,0 +1,42 @@
+id: "b3235eef-1444-4e1e-a313-89f4d104790f"
+meta:
+  title: "Comprehensive pipeline (including all common analysis steps)"
+  subtitle: "A comprehensive pipeline including all commonly analyses for scRNA-Seq data"
+  featured: true
+  maintainer:
+    name: "Xun Zhu"
+    email: "zhuxun@gmail.com"
+steps:
+  -
+    gbox: "UploadFiles-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyNormalization-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyGeneFiltering-{VER}"
+    initialState: null
+  -
+    gbox: "LogTransformation-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyPCA-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyTsne-{VER}"
+    initialState: null
+  -
+    gbox: "SampleColoring-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyClustering-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyMarkerGenes-{VER}"
+    initialState: null
+  -
+    gbox: "BroadGSEA-{VER}"
+    initialState: null
+  -
+    gbox: "ScanpyPseudotime-{VER}"
+    initialState: null

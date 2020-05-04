@@ -1,0 +1,10 @@
+id: InteractiveOutlierRemoval-{VER}
+meta:
+  title: Interactive outlier removal {VER}
+  subtitle: Pick unwanted samples from a scatter plot
+endpoints:
+  backend:
+    cmd: python ./interactive_outlier_removal.py
+    type: docker
+    image: {GBOX}
+frontend: InteractiveOutlierRemoval
