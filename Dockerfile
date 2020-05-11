@@ -6,6 +6,13 @@ FROM python:3.8
 
 MAINTAINER "Xun Zhu" zhuxun2@gmail.com
 
+# Make terminal colorful, useful for build information, editing, etc...
+ENV TERM=xterm-256color
+ENV PATH="$PATH:."
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV TZ America/New_York
+
 WORKDIR /usr/src/app
 
 RUN apt-get update
@@ -95,6 +102,7 @@ RUN pip install git+https://github.com/chriscainx/mnnpy.git
 # RUN cd ./scanpy && pip install -e .
 RUN pip install scanpy
 
+RUN pip install modin[ray]
 
 COPY ./keras.json /root/.keras/keras.json
 COPY ./matplotlibrc /root/.config/matplotlib/matplotlibrc

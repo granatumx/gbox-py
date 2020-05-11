@@ -84,7 +84,7 @@ def main():
                 poly = Polygon(1.1*(np.array(ptslist)-cent)+cent, facecolor=color)
                 poly.set_capstyle('round')
                 plt.gca().add_patch(poly)
-            plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=6, ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
+                plt.text(lowestpt[0], lowestpt[1]-scaley*10, cat, fontsize=6, ha="center", va="center", color="black", bbox=dict(boxstyle="round",fc=whitetransparent,ec=coloropaque))
             for j,x in enumerate(listcats):
                 if x == cat:
                     carr[j] = int(abs(hash(cat)) % 256)

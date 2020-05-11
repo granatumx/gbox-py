@@ -2,7 +2,7 @@
 
 from os.path import basename
 
-import pandas as pd
+import modin.pandas as pd
 
 from collections import Counter
 from granatum_sdk import Granatum, guess_gene_id_type, biomart_col_dict, convert_gene_ids
@@ -19,9 +19,9 @@ def main():
     species = gn.get_arg("species")
 
     if file_format == "csv":
-        tb = pd.read_csv(assay_file, sep=",", index_col=0)
+        tb = pd.read_csv(assay_file, sep=",", index_col=0, engine='c', memory_map=True)
     elif file_format == "tsv":
-        tb = pd.read_csv(assay_file, sep="\t", index_col=0)
+        tb = pd.read_csv(assay_file, sep="\t", index_col=0, engine='c', memory_map=True)
     elif file_format == "excel":
         tb = pd.read_excel(assay_file, index_col=0)
     else:

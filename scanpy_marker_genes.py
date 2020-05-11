@@ -27,7 +27,7 @@ def main():
     sc.pp.neighbors(adata, n_neighbors=20, use_rep='X', method='gauss')
     sc.tl.rank_genes_groups(adata, 'groupVec', n_genes=100000)
     sc.pl.rank_genes_groups(adata, n_genes=20)
-    gn.add_current_figure_to_results('One-vs-rest marker genes', dpi=50, height=figheight)
+    gn.add_current_figure_to_results('One-vs-rest marker genes', dpi=75, height=figheight)
 
     gn._pickle(adata, 'adata')
 

@@ -1,15 +1,16 @@
 from itertools import combinations
 
 import multiprocessing
-
 import scanpy.api as sc
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.preprocessing import quantile_transform
 
 from granatum_sdk import Granatum
 
 # import pandas as pd
 # import seaborn as sns
+
 
 nans = np.array([np.nan, np.nan])
 
@@ -37,16 +38,18 @@ def make_plot(adata, log_trans=False):
     plt.ylabel('Expression lvl (log transformed)')
     plt.tight_layout()
 
-
 def quantile_normalization(mat):
     # double argsort for getting the corresponding ranks for
     # each element in the vector
+
     rank_mat = np.argsort(np.argsort(mat, 1), 1)
     medians = np.median(np.sort(mat, 1), 0)
     normalized = np.zeros_like(mat)
 
     for i in range(rank_mat.shape[0]):
-        normalized[i, :] = medians[rank_mat[i, :]]
+       normalized[i, :] = medians[rank_mat[i, :]]
+
+    # normalized = quantile_transform(mat, copy=False)
 
     return normalized
 
@@ -71,6 +74,7 @@ def main():
         dpi=75 * 40 / max(40, num_cells_to_sample)
     )
 
+    print("Made: doing quantile")
     if method == 'quantile':
         adata.X = quantile_normalization(adata.X)
     elif method == 'scanpy':
@@ -78,13 +82,16 @@ def main():
     else:
         raise ValueError()
 
+    print("Made it here")
     make_plot(adata[sampled_cells_idxs, :], log_trans=log_trans_when_plot)
+    print("Made it here2")
     gn.add_current_figure_to_results(
         'After normalization: Each bar in the box plot represents one cell. Only expression levels between the 5 and 95 percentiles (exclusive) are plotted.',
         height=350,
         dpi=75 * 40 / max(40, num_cells_to_sample)
     )
 
+    print("Made: Exporting")
     gn.export_statically(gn.assay_from_ann_data(adata), 'Normalized assay')
 
     gn.commit()
