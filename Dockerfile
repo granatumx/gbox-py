@@ -101,6 +101,7 @@ RUN pip install git+https://github.com/chriscainx/mnnpy.git
 # COPY ./scanpy/ ./scanpy
 # RUN cd ./scanpy && pip install -e .
 RUN pip install scanpy
+RUN pip install tensorflow
 
 RUN pip install modin[ray]
 
