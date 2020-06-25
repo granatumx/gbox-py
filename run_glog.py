@@ -3,6 +3,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 from granatum_sdk import Granatum
 
@@ -11,7 +12,7 @@ def main():
     gn = Granatum()
 
     assay = gn.get_import('assay')
-    x = np.array(assay.get('matrix'))
+    x = np.array(assay.get('matrix')).astype(np.float)
     log_base = gn.get_arg('log_base')
     n_top = gn.get_arg('n_top')
     n_bottom = gn.get_arg('n_bottom')
@@ -29,7 +30,8 @@ def main():
     top_gene_row = gene_df.head(n_top).sort_values('exp_std', ascending=False).iloc[0]
     bottom_gene_row = gene_df.tail(n_bottom).sort_values('exp_std').iloc[0]
 
-    hk_gene = x[top_gene_row['row_num'], :]
+    hk_gene = np.clip(x[top_gene_row['row_num'], :], a_min=0.00001, a_max=None)
+
     neg_gene = x[bottom_gene_row['row_num'], :]
 
     if which_mid == 'mean':
@@ -39,7 +41,7 @@ def main():
     else:
         raise ValueError()
 
-    loghkdatabk = np.log((hk_gene - alphabk).astype(complex)) / np.log(log_base)
+    loghkdatabk = np.log(hk_gene - alphabk) / np.log(log_base)
 
     c = (np.std(neg_gene[:], ddof=1) / np.std(loghkdatabk, ddof=1))**2
 
