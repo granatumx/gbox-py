@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 
 from granatum_sdk import Granatum
 
+import mailjet_rest
+import os
+
 COLORS = ["#3891ea", "#29ad19", "#ac2d58", "#db7580", "#ed2310", "#ca2dc2", "#5f7575", "#7cc1b5", "#c3bd78", "#4ffa24"]
 
 
@@ -35,5 +38,34 @@ def main():
     gn.commit()
 
 
+def bug_report():
+    api_key = "de76ff500a135ca0fe86f09d7107bda6"
+    api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
+    mailjet = Client(auth=(api_key, api_secret), version='v3.1')
+    data = {
+      'Messages': [
+        {
+          "From": {
+            "Email": "amantrav@umich.edu",
+            "Name": "GranatumX pipeline"
+          },
+          "To": [
+            {
+              "Email": "aravind1338@gmail.com",
+              "Name": "You"
+            }
+          ],
+          "Subject": "Bug report in Color Scatter-plot",
+          "TextPart": "There was a bug encountered in the Color Scatter plot of the GranatumX pipeline"
+        }
+      ]
+    }
+    result = mailjet.send.create(data=data)
+
+
 if __name__ == "__main__":
-    main()
+    # Try except block to email about a error that was encountered #
+    try:
+        main()
+    except:
+        bug_report()
