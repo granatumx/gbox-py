@@ -53,6 +53,9 @@ RUN pip install matplotlib
 RUN pip install networkx 
 RUN pip install numba
 
+# Install mailjet To implement automated email for bugs #
+RUN pip install mailjet_rest
+
 RUN apt-get install -y libtool
 # RUN apt-get install -y llvm-7
 # RUN which llvm-config
