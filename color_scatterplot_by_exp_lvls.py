@@ -7,6 +7,7 @@ from granatum_sdk import Granatum
 
 from mailjet_rest import Client
 import os
+import traceback
 
 COLORS = ["#3891ea", "#29ad19", "#ac2d58", "#db7580", "#ed2310", "#ca2dc2", "#5f7575", "#7cc1b5", "#c3bd78", "#4ffa24"]
 
@@ -38,7 +39,10 @@ def main():
     gn.commit()
 
 
-def bug_report():
+def bug_report(error_message=""):
+
+    # Takes the stack traceback as an argument to email
+
     api_key = "de76ff500a135ca0fe86f09d7107bda6"
     api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
     mailjet = Client(auth=(api_key, api_secret), version='v3.1')
@@ -56,7 +60,7 @@ def bug_report():
             }
           ],
           "Subject": "Bug report in Color Scatter-plot",
-          "TextPart": "There was a bug encountered in the Color Scatter plot of the GranatumX pipeline"
+          "TextPart": "There was a bug encountered in the Color Scatter plot of the GranatumX pipeline \n" + error_message
         }
       ]
     }
@@ -64,8 +68,8 @@ def bug_report():
 
 
 if __name__ == "__main__":
-    # Try except block to email about a error that was encountered #
-    try:
+    # Try except block to send an email about error #
         main()
     except:
-        bug_report()
+        error_message = traceback.format_exc()
+        bug_report(error_message)
