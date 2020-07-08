@@ -69,6 +69,7 @@ def bug_report(error_message=""):
 
 if __name__ == "__main__":
     # Try except block to send an email about error #
+    try:
         main()
     except:
         error_message = traceback.format_exc()
