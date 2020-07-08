@@ -60,7 +60,7 @@ def bug_report(error_message=""):
             }
           ],
           "Subject": "Bug report in Color Scatter-plot",
-          "TextPart": "There was a bug encountered in the Color Scatter plot of the GranatumX pipeline \n" + error_message
+          "TextPart": "There was a bug encountered in the Color Scatter plot step of the GranatumX pipeline: \n\n" + error_message
         }
       ]
     }
