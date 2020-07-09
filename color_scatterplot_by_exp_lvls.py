@@ -8,6 +8,7 @@ from granatum_sdk import Granatum
 from mailjet_rest import Client
 import os
 import traceback
+import sys
 
 COLORS = ["#3891ea", "#29ad19", "#ac2d58", "#db7580", "#ed2310", "#ca2dc2", "#5f7575", "#7cc1b5", "#c3bd78", "#4ffa24"]
 
@@ -50,7 +51,7 @@ def bug_report(error_message=""):
       'Messages': [
         {
           "From": {
-            "Email": "amantrav@umich.edu",
+            "Email": "lana.garmire.group@gmail.com",
             "Name": "GranatumX pipeline"
           },
           "To": [
@@ -73,4 +74,5 @@ if __name__ == "__main__":
         main()
     except:
         error_message = traceback.format_exc()
+        sys.stderr.write(error_message) # Write the error to stderr anyway so the user can see what went wrong
         bug_report(error_message)
