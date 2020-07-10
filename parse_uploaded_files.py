@@ -9,7 +9,6 @@ from granatum_sdk import Granatum, guess_gene_id_type, biomart_col_dict, convert
 
 import numpy as np
 
-global email_address # User's email address can be accessed by every module
 email_address = ""
 
 def main():
@@ -23,7 +22,7 @@ def main():
     species = gn.get_arg("species")
 
     email_address = gn.get_arg("email_address")
-    print(email_address)
+    print(email_address) # This works
 
     if file_format == "csv":
         tb = pd.read_csv(assay_file, sep=",", index_col=0, engine='c', memory_map=True)
@@ -128,4 +127,6 @@ The first few rows and columns:
 
 
 if __name__ == "__main__":
+    print(email_address)
     main()
+    print(email_address)
