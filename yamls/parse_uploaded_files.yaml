@@ -65,3 +65,5 @@ frontend:
       label: Add extra info (from BioMart) into gene metadata
       default: true
       injectInto: add_info
+    - type: text
+      label: Enter your email address
