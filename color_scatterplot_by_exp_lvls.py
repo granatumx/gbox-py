@@ -71,7 +71,6 @@ def bug_report(error_message=""):
     }
     result = mailjet.send.create(data=data)
     print(email_address)
-    print(type(email_address))
 
 
 if __name__ == "__main__":
