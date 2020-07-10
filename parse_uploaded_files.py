@@ -14,7 +14,7 @@ email_address = ""
 
 def main():
     global email_address
-    
+
     gn = Granatum()
 
     assay_file = gn.get_uploaded_file_path("assayFile")
@@ -23,6 +23,7 @@ def main():
     species = gn.get_arg("species")
 
     email_address = gn.get_arg("email_address")
+    print(email_address)
 
     if file_format == "csv":
         tb = pd.read_csv(assay_file, sep=",", index_col=0, engine='c', memory_map=True)
