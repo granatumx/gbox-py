@@ -65,7 +65,6 @@
                                             "seed",
                                             "select",
                                             "text"
-                                            "boolean"
                                         ],
                                         "type": "string"
                                     }
