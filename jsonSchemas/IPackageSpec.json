@@ -60,9 +60,6 @@
                                             "step": {
                                                 "type": "number"
                                             },
-                                            "optional":{
-                                                "type": "boolean"
-                                            },
                                             "type": {
                                                 "enum": [
                                                     "checkbox",
