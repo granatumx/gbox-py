@@ -9,14 +9,20 @@ from granatum_sdk import Granatum, guess_gene_id_type, biomart_col_dict, convert
 
 import numpy as np
 
+global email_address # User's email address can be accessed by every module
+email_address = ""
 
 def main():
+    global email_address
+    
     gn = Granatum()
 
     assay_file = gn.get_uploaded_file_path("assayFile")
     sample_meta_file = gn.get_uploaded_file_path("sampleMetaFile")
     file_format = gn.get_arg("fileFormat")
     species = gn.get_arg("species")
+
+    email_address = gn.get_arg("email_address")
 
     if file_format == "csv":
         tb = pd.read_csv(assay_file, sep=",", index_col=0, engine='c', memory_map=True)

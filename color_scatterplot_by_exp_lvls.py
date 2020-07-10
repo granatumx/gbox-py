@@ -10,6 +10,8 @@ import os
 import traceback
 import sys
 
+import parse_uploaded_files
+
 COLORS = ["#3891ea", "#29ad19", "#ac2d58", "#db7580", "#ed2310", "#ca2dc2", "#5f7575", "#7cc1b5", "#c3bd78", "#4ffa24"]
 
 
@@ -44,6 +46,8 @@ def bug_report(error_message=""):
 
     # Takes the stack traceback as an argument to email
 
+    email_address = parse_uploaded_files.email_address
+
     api_key = "de76ff500a135ca0fe86f09d7107bda6"
     api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
     mailjet = Client(auth=(api_key, api_secret), version='v3.1')
@@ -56,7 +60,7 @@ def bug_report(error_message=""):
           },
           "To": [
             {
-              "Email": "aravind1338@gmail.com",
+              "Email": email_address,
               "Name": "You"
             }
           ],
