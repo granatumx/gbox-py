@@ -69,3 +69,4 @@ frontend:
       label: Enter your email address
       default: false
       injectInto: email_address
+      optional : false
