@@ -60,7 +60,7 @@ def bug_report(error_message=""):
           },
           "To": [
             {
-              "Email": email_address,
+              "Email": "aravind1338@gmail.com",
               "Name": "You"
             }
           ],
@@ -70,6 +70,8 @@ def bug_report(error_message=""):
       ]
     }
     result = mailjet.send.create(data=data)
+    print(email_address)
+    print(type(email_address))
 
 
 if __name__ == "__main__":
