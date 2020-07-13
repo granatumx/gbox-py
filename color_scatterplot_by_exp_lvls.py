@@ -64,12 +64,10 @@ def bug_report(error_message=""):
             {
               "Email": email_address,
               "Name": "User"
-            }
-          ]
-          "Cc": [
+            },
             {
               "Email": "amantrav@umich.edu",
-              "Name": "CC"
+              "Name": "Developer"
             }
           ],
           "Subject": "Bug report in Color Scatter-plot",
