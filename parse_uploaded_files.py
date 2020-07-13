@@ -26,12 +26,6 @@ def main():
     with open("shared.pkl","wb") as fp:
         pickle.dump(shared, fp)
 
-    # Testing to see if pickle file is created
-    with open("shared.pkl", "rb") as file:
-        shared = pickle.load(file)
-        email_address = shared["email_address"]
-        print(email_address)
-
     if file_format == "csv":
         tb = pd.read_csv(assay_file, sep=",", index_col=0, engine='c', memory_map=True)
     elif file_format == "tsv":

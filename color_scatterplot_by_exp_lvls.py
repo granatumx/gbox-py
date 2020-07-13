@@ -46,9 +46,9 @@ def bug_report(error_message=""):
 
     # Takes the stack traceback as an argument to email
 
-    fp = open("shared.pkl", "rb")
-    shared = pickle.load(fp)
-    email_address = shared["email_address"]
+    with open("shared.pkl", "rb") as fp:
+        shared = pickle.load(fp)
+        email_address = shared["email_address"]
 
     api_key = "de76ff500a135ca0fe86f09d7107bda6"
     api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
