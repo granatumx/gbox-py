@@ -9,10 +9,9 @@ from granatum_sdk import Granatum, guess_gene_id_type, biomart_col_dict, convert
 
 import numpy as np
 
-email_address = ""
+import pickle
 
 def main():
-    global email_address
 
     gn = Granatum()
 
@@ -21,8 +20,11 @@ def main():
     file_format = gn.get_arg("fileFormat")
     species = gn.get_arg("species")
 
+    # Share the email address among other gboxes using a pickle dump #
     email_address = gn.get_arg("email_address")
-    print(email_address) # This works
+    shared = {"email_address":email_address}
+    fp = open("shared.pkl","wb")
+    pickle.dump(shared, fp)
 
     if file_format == "csv":
         tb = pd.read_csv(assay_file, sep=",", index_col=0, engine='c', memory_map=True)
@@ -127,6 +129,4 @@ The first few rows and columns:
 
 
 if __name__ == "__main__":
-    print(email_address)
     main()
-    print(email_address)
