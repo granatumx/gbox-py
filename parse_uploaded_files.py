@@ -23,8 +23,14 @@ def main():
     # Share the email address among other gboxes using a pickle dump #
     email_address = gn.get_arg("email_address")
     shared = {"email_address":email_address}
-    fp = open("shared.pkl","wb")
-    pickle.dump(shared, fp)
+    with open("shared.pkl","wb") as fp:
+        pickle.dump(shared, fp)
+
+    # Testing to see if pickle file is created
+    with open("shared.pkl", "rb") as file:
+        shared = pickle.load(file)
+        email_address = shared["email_address"]
+        print(email_address)
 
     if file_format == "csv":
         tb = pd.read_csv(assay_file, sep=",", index_col=0, engine='c', memory_map=True)
