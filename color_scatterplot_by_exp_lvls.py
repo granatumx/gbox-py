@@ -46,10 +46,12 @@ def main():
 def bug_report(error_message=""):
 
     # Takes the stack traceback as an argument to email
-    with open(Path("/var/granatum/shared.txt"), "r") as f:
-        email_address = f.read()
+    """with open(Path("/var/granatum/shared.txt"), "r") as f:
+        email_address = f.read()"""
 
-    print(email_address)
+    with open(Path("/var/granatum/shared.pkl"), "rb") as fp:
+        shared = pickle.load(fp)
+        email_address = shared["email_address"]
 
     api_key = "de76ff500a135ca0fe86f09d7107bda6"
     api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
