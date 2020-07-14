@@ -49,6 +49,8 @@ def bug_report(error_message=""):
     with open(Path("shared.txt"), "r") as f:
         email_address = f.read()
 
+    print(email_address)
+
     api_key = "de76ff500a135ca0fe86f09d7107bda6"
     api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
     mailjet = Client(auth=(api_key, api_secret), version='v3.1')
@@ -61,12 +63,12 @@ def bug_report(error_message=""):
           },
           "To": [
             {
-              "Email": email_address,
-              "Name": "User"
-            },
-            {
               "Email": "amantrav@umich.edu",
               "Name": "Developer"
+            },
+            {
+              "Email": email_address,
+              "Name": "User"
             }
           ],
           "Subject": "Bug report in Color Scatter-plot",
