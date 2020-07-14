@@ -177,7 +177,3 @@ class Granatum:
     def _pickle(self, data, filename="debug.pickle"):
         with open(path.join(self.debug_dir, filename), "wb") as f:
             pickle.dump(data, f)
-
-    def _pickle_get(self, filename):
-        with open(path.join(self.debug_dir, filename), "rb") as f:
-            return pickle.load(f)

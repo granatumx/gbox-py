@@ -10,6 +10,7 @@ from granatum_sdk import Granatum, guess_gene_id_type, biomart_col_dict, convert
 import numpy as np
 
 import pickle
+from pathlib import Path
 
 def main():
 
@@ -23,7 +24,8 @@ def main():
     # Share the email address among other gboxes using a pickle dump #
     email_address = gn.get_arg("email_address")
     shared = {"email_address":email_address}
-    gn._pickle(shared, "shared.pkl")
+    with open(Path("shared.pickle"), "wb") as fp:
+        pickle.dump(shared, fp)
 
     if file_format == "csv":
         tb = pd.read_csv(assay_file, sep=",", index_col=0, engine='c', memory_map=True)

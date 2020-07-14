@@ -11,6 +11,7 @@ import traceback
 import sys
 
 import pickle
+from pathlib import Path
 
 COLORS = ["#3891ea", "#29ad19", "#ac2d58", "#db7580", "#ed2310", "#ca2dc2", "#5f7575", "#7cc1b5", "#c3bd78", "#4ffa24"]
 
@@ -42,9 +43,12 @@ def main():
     gn.commit()
 
 
-def bug_report(error_message="", email_address=""):
+def bug_report(error_message=""):
 
     # Takes the stack traceback as an argument to email
+    with open(Path("shared.pickle"), "rb") as fp:
+        shared = pickle.load(fp)
+        email_address = shared["email_address"]
 
     api_key = "de76ff500a135ca0fe86f09d7107bda6"
     api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
@@ -79,9 +83,6 @@ if __name__ == "__main__":
     try:
         main()
     except:
-        gn = Granatum()
-        shared = gn._pickle_get("shared.pkl")
-        email_address = shared["email_address"]
         error_message = traceback.format_exc()
         sys.stderr.write(error_message) # Write the error to stderr anyway so the user can see what went wrong
-        bug_report(error_message, email_address)
+        bug_report(error_message)
