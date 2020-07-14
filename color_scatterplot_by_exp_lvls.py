@@ -46,7 +46,7 @@ def main():
 def bug_report(error_message=""):
 
     # Takes the stack traceback as an argument to email
-    with open(Path("shared.txt"), "r") as f:
+    with open(Path("/var/granatum/shared.txt"), "r") as f:
         email_address = f.read()
 
     print(email_address)
