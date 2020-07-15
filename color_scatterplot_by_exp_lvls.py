@@ -9,7 +9,7 @@ import os
 import traceback
 import sys
 
-from helpers.py import bug_report
+from gbox_py_helpers import bug_report
 
 COLORS = ["#3891ea", "#29ad19", "#ac2d58", "#db7580", "#ed2310", "#ca2dc2", "#5f7575", "#7cc1b5", "#c3bd78", "#4ffa24"]
 
