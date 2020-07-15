@@ -12,6 +12,7 @@ import sys
 
 import pickle
 from pathlib import Path
+from helpers.py import bug_report
 
 COLORS = ["#3891ea", "#29ad19", "#ac2d58", "#db7580", "#ed2310", "#ca2dc2", "#5f7575", "#7cc1b5", "#c3bd78", "#4ffa24"]
 
@@ -43,44 +44,6 @@ def main():
     gn.commit()
 
 
-def bug_report(error_message=""):
-
-    # Takes the stack traceback as an argument to email
-    """with open(Path("/var/granatum/shared.txt"), "r") as f:
-        email_address = f.read()"""
-
-    with open(Path("/var/granatum/shared.pkl"), "rb") as fp:
-        shared = pickle.load(fp)
-        email_address = shared["email_address"]
-
-    api_key = "de76ff500a135ca0fe86f09d7107bda6"
-    api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
-    mailjet = Client(auth=(api_key, api_secret), version='v3.1')
-    data = {
-      'Messages': [
-        {
-          "From": {
-            "Email": "lana.garmire.group@gmail.com",
-            "Name": "GranatumX pipeline"
-          },
-          "To": [
-            {
-              "Email": "amantrav@umich.edu",
-              "Name": "Developer"
-            },
-            {
-              "Email": email_address,
-              "Name": "User"
-            }
-          ],
-          "Subject": "Bug report in Color Scatter-plot",
-          "TextPart": "There was an error encountered in the Color Scatter plot step of the GranatumX pipeline: \n\n" + error_message
-        }
-      ]
-    }
-    result = mailjet.send.create(data=data)
-
-
 if __name__ == "__main__":
     # Try except block to send an email about error #
     try:
@@ -88,4 +51,4 @@ if __name__ == "__main__":
     except:
         error_message = traceback.format_exc()
         sys.stderr.write(error_message) # Write the error to stderr anyway so the user can see what went wrong
-        bug_report(error_message)
+        bug_report("Color Scatter-Plot", error_message)

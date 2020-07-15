@@ -26,9 +26,6 @@ def main():
     shared = {"email_address":email_address}
     with open(Path("/var/granatum/shared.pkl"), "wb") as fp:
         pickle.dump(shared, fp)
-        
-    """with open(Path("/var/granatum/shared.txt"), "w") as f:
-        f.write(email_address)"""
 
     if file_format == "csv":
         tb = pd.read_csv(assay_file, sep=",", index_col=0, engine='c', memory_map=True)
