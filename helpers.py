@@ -1,3 +1,7 @@
+from pathlib import Path
+from mailjet_rest import Client
+import pickle
+
 # Function that leverages MailJet to send a bug report email to the user and developer
 
 def bug_report(from_gbox, error_message=""):
