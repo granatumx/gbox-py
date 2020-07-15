@@ -1,4 +1,3 @@
 #!/bin/bash
 
-docker build -t $IMAGE_NAME --build-arg API_KEY=$API_KEY .
-docker build -t $IMAGE_NAME --build-arg API_SECRET=$API_SECRET .
+docker build -t $IMAGE_NAME --build-arg API_KEY=$API_KEY --build-arg API_SECRET=$API_SECRET .
