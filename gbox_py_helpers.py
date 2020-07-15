@@ -12,11 +12,14 @@ def bug_report(from_gbox, error_message=""):
         shared = pickle.load(fp)
         email_address = shared["email_address"]
 
-    api_key = "de76ff500a135ca0fe86f09d7107bda6"
-    api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
+    #api_key = "de76ff500a135ca0fe86f09d7107bda6"
+    #api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
 
-    print(os.environ['API_KEY'])
-    print(os.environ['API_SECRET'])
+    api_key = os.environ['API_KEY']
+    api_secret = os.environ['API_SECRET']
+
+    print(api_key, api_secret)
+    
     mailjet = Client(auth=(api_key, api_secret), version='v3.1')
     data = {
       'Messages': [
