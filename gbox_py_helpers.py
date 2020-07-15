@@ -1,6 +1,7 @@
 from pathlib import Path
 from mailjet_rest import Client
 import pickle
+import os
 
 # Function that leverages MailJet to send a bug report email to the user and developer
 
@@ -13,6 +14,9 @@ def bug_report(from_gbox, error_message=""):
 
     api_key = "de76ff500a135ca0fe86f09d7107bda6"
     api_secret = "a8cb3bfd13e09b8c8b13c2516cc5a542"
+
+    print(os.environ['API_KEY'])
+    print(os.environ['API_SECRET'])
     mailjet = Client(auth=(api_key, api_secret), version='v3.1')
     data = {
       'Messages': [
