@@ -5,7 +5,7 @@ import os
 
 # Function that leverages MailJet to send a bug report email to the user and developer
 
-def bug_report(from_gbox, error_message=""):
+def bug_report(from_gbox, developer="lana.garmire.group@gmail.com", error_message=""):
 
     # Takes the stack traceback as an argument to email
     with open(Path("/var/granatum/shared.pkl"), "rb") as fp:
@@ -25,7 +25,7 @@ def bug_report(from_gbox, error_message=""):
           },
           "To": [
             {
-              "Email": "amantrav@umich.edu",
+              "Email": developer,
               "Name": "Developer"
             },
             {
