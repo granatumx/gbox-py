@@ -17,6 +17,11 @@ def main():
     group_dict = gn.get_import('groupVec')
     group_vec = pd.Categorical([group_dict.get(x) for x in sample_ids])
     num_groups = len(group_vec.categories)
+
+    print("Number of groups = ", num_groups)
+    print("\n")
+    print(group_vec)
+    
     figheight = 400 * (math.floor((num_groups - 1) / 7) + 1)
 
     adata = sc.AnnData(np.array(assay.get('matrix')).transpose())
