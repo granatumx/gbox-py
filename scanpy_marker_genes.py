@@ -54,14 +54,14 @@ def main():
         plt.axis('off')
         gn.add_current_figure_to_results('One-vs-rest marker genes', dpi=75, height=figheight)
 
-        gn._pickle(adata, 'adata')
+        """gn._pickle(adata, 'adata')
 
         rg_res = adata.uns['rank_genes_groups']
 
         for group in rg_res['names'].dtype.names:
             genes_names = [str(x[group]) for x in rg_res['names']]
             scores = [float(x[group]) for x in rg_res['scores']]
-            gn.export(dict(zip(genes_names, scores)), 'Marker score ({} vs. rest)'.format(group), kind='geneMeta')
+            gn.export(dict(zip(genes_names, scores)), 'Marker score ({} vs. rest)'.format(group), kind='geneMeta')"""
 
         gn.commit()
 
