@@ -5,6 +5,7 @@ import scanpy.api as sc
 import numpy as np
 import pandas as pd
 import math
+import matplotlib.pyplot as plt
 
 from granatum_sdk import Granatum
 
@@ -61,7 +62,7 @@ def main():
             genes_names = [str(x[group]) for x in rg_res['names']]
             scores = [float(x[group]) for x in rg_res['scores']]
             gn.export(dict(zip(genes_names, scores)), 'Marker score ({} vs. rest)'.format(group), kind='geneMeta')
-            
+
         gn.commit()
 
 
