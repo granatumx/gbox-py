@@ -28,9 +28,11 @@ def make_plot(adata, log_trans=False):
         filtered = trim_extreme(cell, 5, 95)
         if log_trans:
             filtered = np.log1p(filtered)
-        if filtered.shape[0] == 0:
+        """if filtered.shape[0] == 0:
             filtered = nans
-        violin_data.append(filtered)
+        violin_data.append(filtered)"""
+        if filtered.shape[0] != 0:
+            violin_data.append(filtered)
 
     plt.figure()
     plt.boxplot(violin_data)
