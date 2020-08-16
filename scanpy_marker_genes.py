@@ -50,7 +50,7 @@ def main():
     except Exception as e:
 
         plt.figure()
-        plt.text(1, 1, "Incompatible group vector due to insufficent cells. Please retry the step with a different group vector")
+        plt.text(0.01, 0.3, "Incompatible group vector due to insufficent cells. Please retry the step with a different group vector", size='large')
         plt.axis('off')
         gn.add_current_figure_to_results('One-vs-rest marker genes', dpi=75, height=figheight)
 

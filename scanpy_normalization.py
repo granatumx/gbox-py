@@ -13,6 +13,7 @@ from granatum_sdk import Granatum
 
 
 nans = np.array([np.nan, np.nan])
+zeros = np.array([0, 0])
 
 
 def trim_extreme(x, a, b):
@@ -29,7 +30,8 @@ def make_plot(adata, log_trans=False):
         if log_trans:
             filtered = np.log1p(filtered)
         if filtered.shape[0] == 0:
-            filtered = nans
+            #filtered = nans
+            filtered = zeros
         violin_data.append(filtered)
 
     plt.figure()
