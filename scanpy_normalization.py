@@ -34,8 +34,8 @@ def make_plot(adata, log_trans=False):
             #filtered = nans
             filtered = zeros
         violin_data.append(filtered)"""
-            if cell.shape[0] == 0:
-                cell = nans
+        if cell.shape[0] == 0:
+            cell = nans
 
         violin_data.append(cell)
 
