@@ -35,7 +35,7 @@ def make_plot(adata, log_trans=False):
             filtered = zeros
         violin_data.append(filtered)"""
         if cell.shape[0] == 0:
-            cell = nans
+            cell = zeros
 
         violin_data.append(cell)
 
