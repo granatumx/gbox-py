@@ -25,25 +25,18 @@ def trim_extreme(x, a, b):
 
 def make_plot(adata, log_trans=False):
     violin_data = []
-    counter = 0
     for cell in adata.X:
         #filtered = trim_extreme(cell, 5, 95)
         if log_trans:
-            #filtered = np.log1p(filtered)
             cell = np.log1p(cell)
-        """if filtered.shape[0] == 0:
-            #filtered = nans
-            filtered = zeros
-        violin_data.append(filtered)"""
         if cell.shape[0] == 0:
             cell = zeros
-            counter += 1
 
         violin_data.append(cell)
 
     plt.figure()
     plt.boxplot(violin_data)
-    plt.xlabel('Cells' + ',' + str(counter))
+    plt.xlabel('Cells')
     plt.ylabel('Expression lvl (log transformed)')
     plt.tight_layout()
 
@@ -78,12 +71,11 @@ def main():
 
     make_plot(adata[sampled_cells_idxs, :], log_trans=log_trans_when_plot)
     gn.add_current_figure_to_results(
-        'Before normalization: Each bar in the box plot represents one cell. Only expression levels between the 5 and 95 percentiles (exclusive) are plotted.',
+        'Before normalization: Each bar in the box plot represents one cell.',
         height=350,
         dpi=75 * 40 / max(40, num_cells_to_sample)
     )
 
-    print("Made: doing quantile")
     if method == 'quantile':
         adata.X = quantile_normalization(adata.X)
     elif method == 'scanpy':
@@ -91,16 +83,13 @@ def main():
     else:
         raise ValueError()
 
-    print("Made it here")
     make_plot(adata[sampled_cells_idxs, :], log_trans=log_trans_when_plot)
-    print("Made it here2")
     gn.add_current_figure_to_results(
-        'After normalization: Each bar in the box plot represents one cell. Only expression levels between the 5 and 95 percentiles (exclusive) are plotted.',
+        'After normalization: Each bar in the box plot represents one cell.',
         height=350,
         dpi=75 * 40 / max(40, num_cells_to_sample)
     )
 
-    print("Made: Exporting")
     gn.export_statically(gn.assay_from_ann_data(adata), 'Normalized assay')
 
     gn.commit()
