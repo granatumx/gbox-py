@@ -25,6 +25,7 @@ def trim_extreme(x, a, b):
 
 def make_plot(adata, log_trans=False):
     violin_data = []
+    counter = 0
     for cell in adata.X:
         #filtered = trim_extreme(cell, 5, 95)
         if log_trans:
@@ -36,12 +37,13 @@ def make_plot(adata, log_trans=False):
         violin_data.append(filtered)"""
         if cell.shape[0] == 0:
             cell = zeros
+            counter += 1
 
         violin_data.append(cell)
 
     plt.figure()
     plt.boxplot(violin_data)
-    plt.xlabel('Cells')
+    plt.xlabel('Cells' + ',' + str(counter))
     plt.ylabel('Expression lvl (log transformed)')
     plt.tight_layout()
 
