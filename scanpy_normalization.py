@@ -34,7 +34,7 @@ def make_plot(adata, log_trans=False):
             #cell = zeros
             filtered = zeros
 
-        violin_data.append(cell)
+        violin_data.append(filtered)
 
     plt.figure()
     plt.boxplot(violin_data)
