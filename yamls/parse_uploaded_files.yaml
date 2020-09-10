@@ -33,6 +33,8 @@ frontend:
           value: tsv
         - label: Excel file (*.xls/xlsx)
           value: excel
+        - label: Zip file(*.zip)
+          value: zip
       default: csv
       injectInto: fileFormat
     - type: checkbox
