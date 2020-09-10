@@ -32,6 +32,7 @@ def handle_zip_file(assay):
         name = decompressed.namelist()[0]
         row_num = 0
         for line in open(name, 'r').readlines():
+            line = line.decode('ascii')
             col_num = 0
 
             # Start constructing coo matrix
