@@ -29,7 +29,7 @@ ENV TZ America/New_York
 RUN apt-get install -y tzdata
 # RUN ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
 
-RUN apt-get -y install python-pandas
+# RUN apt-get -y install python-pandas
 RUN apt-get -y install python-numpy
 RUN apt-get -y install python-scipy
 RUN apt-get -y install python3-sklearn python3-sklearn-lib
@@ -52,6 +52,7 @@ RUN pip install natsort
 RUN pip install matplotlib
 RUN pip install networkx 
 RUN pip install numba
+RUN pip install pandas
 
 # Install mailjet To implement automated email for bugs #
 RUN pip install mailjet_rest
