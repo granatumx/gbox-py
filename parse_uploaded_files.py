@@ -69,7 +69,7 @@ def handle_zip_file(assay):
                 row_num += 1
 
 
-    sparse_matrix = coo_matrix((data, (row, column)), shape = (numrows, numcols)).tocsc()
+    sparse_matrix = coo_matrix((data, (row, column)), shape = (numrows, numcols))
     df = pandas.DataFrame.sparse.from_spmatrix(sparse_matrix, index=row_names, columns=column_names)
 
     return df

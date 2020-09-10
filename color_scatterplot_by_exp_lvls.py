@@ -48,4 +48,4 @@ if __name__ == "__main__":
     except:
         error_message = traceback.format_exc()
         sys.stderr.write(error_message) # Write the error to stderr anyway so the user can see what went wrong
-        bug_report("Color Scatter-Plot", developer="amantrav@umich.edu", error_message)
+        bug_report("Color Scatter-Plot", "amantrav@umich.edu", error_message)
