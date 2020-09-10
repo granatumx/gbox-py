@@ -12,6 +12,67 @@ import numpy as np
 import pickle
 from pathlib import Path
 
+from zipfile import ZipFile
+from scipy.sparse import coo_matrix
+
+# A function to handle reading zip files
+def handle_zip_file(assay):
+    
+    column_names = []
+    row_names = []
+
+    row = []
+    column = []
+    data = []
+
+    numrows = 0
+    numcols = 0
+    
+    with ZipFile(assay, 'r') as decompressed:
+        name = decompressed.namelist()[0]
+        row_num = 0
+        for line in open(name, 'r').readlines():
+            col_num = 0
+
+            # Start constructing coo matrix
+            values = line.split(",")
+            numcols = len(values) - 1 # first column is row names
+
+            # The first row consists of column names #
+            if row_num == 0:
+                column_names = values[1:]
+                row_num += 1
+
+            else:
+                numrows += 1
+
+                for point in values:
+
+                    # first value of every row is the row name
+                    if col_num == 0:
+                        row_names.append(point)
+                    else:
+                        try:
+                            temp_val = float(point)
+                            if temp_val != 0:
+                                row.append(row_num-1)
+                                column.append(col_num-1)
+                                data.append(temp_val)
+
+                        except Exception as e:
+                            pass
+
+                    col_num += 1
+
+                row_num += 1
+
+
+    sparse_matrix = coo_matrix((data, (row, column)), shape = (numrows, numcols)).tocsc()
+    df = pd.DataFrame.sparse.from_spmatrix(sparse_matrix, index=row_names, columns=column_names)
+
+    return df
+
+
 def main():
 
     gn = Granatum()
@@ -33,6 +94,8 @@ def main():
         tb = pd.read_csv(assay_file, sep="\t", index_col=0, engine='c', memory_map=True)
     elif file_format == "excel":
         tb = pd.read_excel(assay_file, index_col=0)
+    elif file_format == "zip":
+        tb = handle_zip_file(assay_file)
     else:
         gn.error("Unknown file format: {}".format(file_format))
 
