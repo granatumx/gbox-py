@@ -3,6 +3,7 @@
 from os.path import basename
 
 import modin.pandas as pd
+import pandas
 
 from collections import Counter
 from granatum_sdk import Granatum, guess_gene_id_type, biomart_col_dict, convert_gene_ids
@@ -69,7 +70,7 @@ def handle_zip_file(assay):
 
 
     sparse_matrix = coo_matrix((data, (row, column)), shape = (numrows, numcols)).tocsc()
-    df = pd.DataFrame.sparse.from_spmatrix(sparse_matrix, index=row_names, columns=column_names)
+    df = pandas.DataFrame.sparse.from_spmatrix(sparse_matrix, index=row_names, columns=column_names)
 
     return df
 
