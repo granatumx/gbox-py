@@ -73,7 +73,7 @@ def handle_zip_file(assay):
     sparse_matrix = coo_matrix((data, (row, column)), shape = (numrows, numcols))
     df = pandas.DataFrame.sparse.from_spmatrix(sparse_matrix, index=row_names, columns=column_names)
 
-    return sparse_matrix, df
+    return df
 
 
 def main():
@@ -98,8 +98,7 @@ def main():
     elif file_format == "excel":
         tb = pd.read_excel(assay_file, index_col=0)
     elif file_format == "zip":
-        temp = handle_zip_file(assay_file)
-        tb_sparse, tb = temp[0], temp[1]
+        tb = handle_zip_file(assay_file)
     else:
         gn.error("Unknown file format: {}".format(file_format))
 
@@ -128,21 +127,11 @@ def main():
 
     assay_export_name = "[A]{}".format(basename(assay_file))
 
-    if file_format == "zip":
-
-        exported_assay = {
-            "matrix": tb_sparse.toarray().tolist(),
-            "sampleIds": sample_ids,
-            "geneIds": gene_ids,
-        }
-
-    else:
-
-        exported_assay = {
-            "matrix": tb.values.tolist(),
-            "sampleIds": sample_ids,
-            "geneIds": gene_ids,
-        }
+    exported_assay = {
+        "matrix": tb.values.tolist(),
+        "sampleIds": sample_ids,
+        "geneIds": gene_ids,
+    }
 
 
     gn.export(exported_assay, assay_export_name, "assay")
