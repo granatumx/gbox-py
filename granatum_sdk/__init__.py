@@ -16,6 +16,8 @@ import scanpy.api as sc
 
 from .gene_id_helpers import *
 
+from scipy.sparse import coo_matrix
+
 
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
@@ -142,7 +144,13 @@ class Granatum:
     # -- helpers -------------------------------------------------
 
     def ann_data_from_assay(self, assay):
-        adata = sc.AnnData(np.array(assay.get("matrix")).transpose())
+
+        # If the matrix was stored as a sparse coo_matrix, use toarray to convert to dense array
+        if type(assay.get("matrix")) == coo_matrix:
+            adata = sc.AnnData(np.array(assay.get("matrix")).toarray().transpose())
+        else:
+            adata = sc.AnnData(np.array(assay.get("matrix")).transpose())
+
         adata.var_names = assay.get("geneIds")
         adata.obs_names = assay.get("sampleIds")
         return adata
@@ -155,7 +163,14 @@ class Granatum:
         }
 
     def pandas_from_assay(self, assay, samples_as_rows=False):
-        df = pd.DataFrame(assay.get("matrix"), index=assay.get("geneIds"), columns=assay.get("sampleIds"))
+
+        # If the matrix was stored as a sparse coo_matrix, use the sparse matrix method
+        if type(assay.get("matrix")) == coo_matrix:
+            df = pd.DataFrame.sparse.from_spmatrix(assay.get("matrix"), index=assay.get("geneIds"), columns=assay.get("sampleIds"))
+        else:
+            df = pd.DataFrame(assay.get("matrix"), index=assay.get("geneIds"), columns=assay.get("sampleIds"))
+
+
         if samples_as_rows:
             df = df.transpose()
         return df
