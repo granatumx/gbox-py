@@ -131,7 +131,7 @@ def main():
     if file_format == "zip":
 
         exported_assay = {
-            "matrix": tb_sparse,
+            "matrix": tb_sparse.toarray().tolist(),
             "sampleIds": sample_ids,
             "geneIds": gene_ids,
         }
