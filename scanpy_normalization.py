@@ -26,15 +26,15 @@ def trim_extreme(x, a, b):
 def make_plot(adata, log_trans=False):
     violin_data = []
     for cell in adata.X:
-        filtered = trim_extreme(cell, 5, 95)
+        #filtered = trim_extreme(cell, 5, 95)
         if log_trans:
-            #cell = np.log1p(cell)
-            filtered = np.log1p(filtered)
-        if filtered.shape[0] == 0:
-            #cell = zeros
-            filtered = zeros
+            cell = np.log1p(cell)
+            #filtered = np.log1p(filtered)
+        if cell.shape[0] == 0:
+            cell = zeros
+            #filtered = zeros
 
-        violin_data.append(filtered)
+        violin_data.append(cell)
 
     plt.figure()
     plt.boxplot(violin_data)
