@@ -154,7 +154,7 @@ class Granatum:
 
     def assay_from_ann_data(self, adata):
         return {
-            "matrix": adata.X.T.tolist(),
+            "matrix": adata.X.T.toarray(),
             "sampleIds": adata.obs_names.tolist(),
             "geneIds": adata.var_names.tolist(),
         }
