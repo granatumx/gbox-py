@@ -26,15 +26,16 @@ def trim_extreme(x, a, b):
 def make_plot(adata, log_trans=False):
     violin_data = []
     for cell in adata.X:
-        #filtered = trim_extreme(cell, 5, 95)
+        filtered = cell.toarray()
+        filtered = trim_extreme(cell, 5, 95)
         if log_trans:
-            cell = np.log1p(cell)
-            #filtered = np.log1p(filtered)
-        if cell.shape[0] == 0:
-            cell = zeros
-            #filtered = zeros
+            #cell = np.log1p(cell)
+            filtered = np.log1p(filtered)
+        if filtered.shape[0] == 0:
+            #cell = zeros
+            filtered = zeros
 
-        violin_data.append(cell)
+        violin_data.append(filtered)
 
     plt.figure()
     plt.boxplot(violin_data)
@@ -73,7 +74,7 @@ def main():
 
     make_plot(adata[sampled_cells_idxs, :], log_trans=log_trans_when_plot)
     gn.add_current_figure_to_results(
-        'Before normalization: Each bar in the box plot represents one cell.',
+        'Before normalization: Each bar in the box plot represents one cell. Only cells between the 5th and 95th percentile are shown.',
         height=350,
         dpi=75 * 40 / max(40, num_cells_to_sample)
     )
@@ -87,7 +88,7 @@ def main():
 
     make_plot(adata[sampled_cells_idxs, :], log_trans=log_trans_when_plot)
     gn.add_current_figure_to_results(
-        'After normalization: Each bar in the box plot represents one cell.',
+        'After normalization: Each bar in the box plot represents one cell. Only cells between the 5th and 95th percentile are shown.',
         height=350,
         dpi=75 * 40 / max(40, num_cells_to_sample)
     )
