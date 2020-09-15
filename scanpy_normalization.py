@@ -56,7 +56,8 @@ def quantile_normalization(mat):
 
     # normalized = quantile_transform(mat, copy=False)
 
-    return normalized.tolist()
+    #return normalized.tolist()
+    return sc.AnnData(csc_matrix(normalized))
 
 
 def main():
@@ -80,7 +81,7 @@ def main():
     )
 
     if method == 'quantile':
-        adata.X = quantile_normalization(adata.X.toarray())
+        adata = quantile_normalization(adata.X.toarray())
     elif method == 'scanpy':
         sc.pp.normalize_total(adata)
     else:
