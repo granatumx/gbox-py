@@ -146,7 +146,7 @@ class Granatum:
     def ann_data_from_assay(self, assay):
 
         sparse_matrix = coo_matrix(assay.get("matrix"))
-        adata = sc.AnnData(np.array(sparse_matrix.transpose()))
+        adata = sc.AnnData(np.array(sparse_matrix.transpose().toarray()))
 
         adata.var_names = assay.get("geneIds")
         adata.obs_names = assay.get("sampleIds")
