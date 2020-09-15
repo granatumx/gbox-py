@@ -5,6 +5,7 @@ import scanpy.api as sc
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.preprocessing import quantile_transform
+from scipy.sparse import csc_matrix
 
 from granatum_sdk import Granatum
 
