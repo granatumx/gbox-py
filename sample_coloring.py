@@ -46,8 +46,8 @@ def main():
             dff = df[df["value"] == cat]
             xs = list(dff["x"])
             ys = list(dff["y"])
-            avgx = sum(dff["x"]) / len(dff["x"]) 
-            avgy = sum(dff["y"]) / len(dff["y"]) 
+            #avgx = sum(dff["x"]) / len(dff["x"]) 
+            #avgy = sum(dff["y"]) / len(dff["y"]) 
             #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=COLORS[i].hex_l, label=cat)
             #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=[abs(hash(cat)) % 256]*len(dff["x"]), cmap=COLORS2, label=cat)
             #plt.scatter(x=dff["x"], y=dff["y"], s=5000 / df.shape[0], c=abs(hash(cat)) % 256, cmap=COLORS2, label=cat)
