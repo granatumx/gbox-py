@@ -153,7 +153,7 @@ The first few rows and columns:
 
     meta_rows = []
     if sample_meta_file is not None:
-        if file_format == "csv":
+        if file_format == "csv" or file_format == "zip":
             sample_meta_tb = pd.read_csv(sample_meta_file)
         elif file_format == "tsv":
             sample_meta_tb = pd.read_csv(sample_meta_file, sep="\t")
