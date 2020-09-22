@@ -28,7 +28,7 @@ def make_plot(adata, log_trans=False):
     violin_data = []
     for cell in adata.X:
         filtered = cell.toarray()
-        filtered = trim_extreme(filtered, 5, 95)
+        #filtered = trim_extreme(filtered, 5, 95)
         if log_trans:
             #cell = np.log1p(cell)
             filtered = np.log1p(filtered)
