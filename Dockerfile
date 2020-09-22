@@ -49,7 +49,7 @@ RUN pip install h5py hdbscan
 RUN pip install ipython
 RUN pip install joblib
 RUN pip install natsort
-RUN pip install matplotlib
+RUN pip install matplotlib==3.3.0
 RUN pip install networkx 
 RUN pip install numba
 RUN pip install pandas
